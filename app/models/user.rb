@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
   
+  enum role: [:student, :instructor, :administrator]
+  
   has_many :assignments
 end
