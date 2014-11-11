@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bluprint</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>bluprint</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<%= nav_bar fixed: :top, brand: 'bluprint', responsive: true do %>
+
+  <%= menu_group do %>
+    <%= menu_item 'My Assignments', my_assignments_path %>
+    <%= menu_item 'My Students', '/my/students' %>
+    <%= drop_down 'Author' do %>
+      <%= menu_item 'Assignments', '/author/assignments' %>
+      <%= menu_item 'Problems', '/author/problems' %>
+    <% end %>
+    <%= drop_down 'Manage' do %>
+      <%= menu_item 'Assignments', '/manage/assignments' %>
+      <%= menu_item 'Problems', '/manage/problems' %>
+      <%= menu_item 'Students', '/manage/students' %>
+      <%= menu_item 'Instructors', '/manage/instructors' %>
+    <% end %>
+  <% end %>
+  
+  <%= menu_group pull: :right do %>
+    <%= menu_item 'My Account', '/my/account' %>
+    <%= menu_item 'Sign Out', destroy_user_session_path, method: :delete %>
+  <% end %>
+  
+<% end %>
+
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>
