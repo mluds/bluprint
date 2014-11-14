@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+ 
+.form-container { width: 360px; margin: auto }
+.notifications-container { width: 540px; margin: auto }

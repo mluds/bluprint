@@ -1,0 +1,2 @@
+module AuthorableAssignmentsHelper
+end
