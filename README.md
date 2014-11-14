@@ -1,5 +1,5 @@
-bluprint Quick Setup
-====================
+bluprint Development Setup
+==========================
 
 1. [Install Rails.](http://rubyonrails.org/download)
 2. Clone this repository. `git clone https://github.com/mluds/bluprint.git`
