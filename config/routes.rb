@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
     
+  get 'problems/edit'
+
   root 'home#home'
   
   get '/my/assignments' => 'assignments#view_current_user', as: :my_assignments
@@ -13,6 +15,8 @@ Rails.application.routes.draw do
   
   get '/author/problems' => 'authorable_problems#view_current_user', as: :author_problems
   get '/manage/problems' => 'authorable_problems#view', as: :manage_problems
+  
+  get '/problems/:id' => 'problems#edit', as: :do_problem
   
   devise_for :users, path: '',
     path_names: {
