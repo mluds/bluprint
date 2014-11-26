@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126171532) do
+ActiveRecord::Schema.define(version: 20141126181740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,23 @@ ActiveRecord::Schema.define(version: 20141126171532) do
   add_index "assignments", ["authorable_assignment_id"], name: "index_assignments_on_authorable_assignment_id", using: :btree
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
+  create_table "assignments_problems", id: false, force: true do |t|
+    t.integer "assignment_id", null: false
+    t.integer "problem_id",    null: false
+  end
+
+  add_index "assignments_problems", ["assignment_id", "problem_id"], name: "index_assignments_problems_on_assignment_id_and_problem_id", using: :btree
+  add_index "assignments_problems", ["problem_id", "assignment_id"], name: "index_assignments_problems_on_problem_id_and_assignment_id", using: :btree
+
+  create_table "authorable_assignments", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authorable_assignments", ["user_id"], name: "index_authorable_assignments_on_user_id", using: :btree
+
   create_table "authorable_problems", force: true do |t|
     t.integer  "user_id"
     t.text     "problem_text"
@@ -38,6 +55,14 @@ ActiveRecord::Schema.define(version: 20141126171532) do
   end
 
   add_index "authorable_problems", ["user_id"], name: "index_authorable_problems_on_user_id", using: :btree
+
+  create_table "instructors_students", id: false, force: true do |t|
+    t.integer "instructor_id", null: false
+    t.integer "student_id",    null: false
+  end
+
+  add_index "instructors_students", ["instructor_id", "student_id"], name: "index_instructors_students_on_instructor_id_and_student_id", using: :btree
+  add_index "instructors_students", ["student_id", "instructor_id"], name: "index_instructors_students_on_student_id_and_instructor_id", using: :btree
 
   create_table "problems", force: true do |t|
     t.integer  "user_id"
