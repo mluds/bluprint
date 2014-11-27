@@ -1,2 +1,26 @@
-<h1>AuthorableProblems#view</h1>
-<p>Find me in app/views/authorable_problems/view.html.erb</p>
+<% if @auth_problems.empty? %>
+  <p>There are no authorable problems to display</p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Problem</th>
+        <th>Author</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @auth_problems.each do |auth_problem| %>
+      <tr>
+        <td><%= auth_problem.id %></td>
+        <td><%= auth_problem.problem_text %></td>
+        <td><%= auth_problem.user.name %></td>
+        <td><%= link_to "Edit", edit_problem_path(id: auth_problem.id) %></td>
+        <td><%= link_to "Delete", edit_problem_path(id: auth_problem.id) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

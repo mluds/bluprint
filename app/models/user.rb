@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   enum role: [:student, :instructor, :administrator]
   
   has_many :assignments
+  has_many :authorable_problems
   has_and_belongs_to_many :students,
     join_table: :instructors_students,
     foreign_key: :instructor_id,

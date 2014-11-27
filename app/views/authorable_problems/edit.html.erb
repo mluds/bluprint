@@ -1,0 +1,7 @@
+<%= form_for @auth_problem, url: update_problem_path do |f| %>
+  <div class="form-group">
+    <%= f.label "Problem" %>
+    <%= f.text_area :problem_text, rows: 3, autofocus: true, class: "form-control" %>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

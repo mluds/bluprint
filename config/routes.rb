@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get '/manage/problems' => 'authorable_problems#view', as: :manage_problems
   
   get '/problems/:id' => 'problems#edit', as: :do_problem
+  get '/author/problems/:id' => 'authorable_problems#edit', as: :edit_problem
+  patch '/author/problems/:id/update' => 'authorable_problems#update', as: :update_problem
   
   devise_for :users, path: '',
     path_names: {
