@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require joint.nojquery
  */
  
 .form-container { width: 360px; margin: auto }

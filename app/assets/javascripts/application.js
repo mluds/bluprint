@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require joint.nojquery
 //= require_tree .
+//= stub diagram

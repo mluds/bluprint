@@ -3,5 +3,10 @@
     <%= f.label "Problem" %>
     <%= f.text_area :problem_text, rows: 3, autofocus: true, class: "form-control" %>
   </div>
+  
+  <div id="paper"></div>
+  
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
+
+<%= javascript_include_tag "diagram" %>
