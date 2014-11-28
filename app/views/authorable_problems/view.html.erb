@@ -1,5 +1,9 @@
+<%= link_to new_auth_problem_path, class: "btn btn-default" do %>
+  <span class="glyphicon glyphicon-file"></span> New problem
+<% end %>
+
 <% if @auth_problems.empty? %>
-  <p>There are no authorable problems to display</p>
+  <p>There are no authorable problems to display.</p>
 <% else %>
   <table class="table">
     <thead>
@@ -17,8 +21,16 @@
         <td><%= auth_problem.id %></td>
         <td><%= auth_problem.problem_text %></td>
         <td><%= auth_problem.user.name %></td>
-        <td><%= link_to "Edit", edit_problem_path(id: auth_problem.id) %></td>
-        <td><%= link_to "Delete", edit_problem_path(id: auth_problem.id) %></td>
+        <td>
+          <%= link_to edit_problem_path(id: auth_problem.id) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to delete_auth_problem_path(id: auth_problem.id), method: :delete do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     </tbody>

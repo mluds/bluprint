@@ -21,5 +21,6 @@ module Bluprint
     # config.i18n.default_locale = :de
     
     config.assets.precompile += %w(authorable_problems.js)
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end
