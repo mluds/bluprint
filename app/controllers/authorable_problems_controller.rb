@@ -1,6 +1,6 @@
 class AuthorableProblemsController < ApplicationController
   def view_current_user
-    @auth_problems = AuthorableProblems.all
+    @auth_problems = AuthorableProblem.all
   end
 
   def view
@@ -22,7 +22,7 @@ class AuthorableProblemsController < ApplicationController
       flash[:notice] = "Problem created"
       redirect_to edit_problem_path(id: auth_problem.id)
     else
-      flash[:alert] = "Error"
+      flash[:alert] = auth_problem.errors.full_messages.first
       redirect_to new_auth_problem_path
     end
   end
@@ -39,7 +39,7 @@ class AuthorableProblemsController < ApplicationController
     if auth_problem.save
       flash[:notice] = "Problem saved"
     else
-      flash[:alert] = "Error"
+      flash[:alert] = auth_problem.errors
     end
     redirect_to edit_problem_path
   end
@@ -49,7 +49,7 @@ class AuthorableProblemsController < ApplicationController
     if auth_problem.destroy
       flash[:notice] = "Problem deleted"
     else
-      flash[:alert] = "Error"
+      flash[:alert] = auth_problem.errors
     end
     redirect_to :back
   end

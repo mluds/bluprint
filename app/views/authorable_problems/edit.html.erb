@@ -4,7 +4,17 @@
     <%= f.text_area :problem_text, rows: 3, autofocus: true, class: "form-control" %>
   </div>
   
-  <div id="paper"></div>
+  <div class="form-group">
+    <div id="entity" class="btn btn-default">Entity</div>
+    <div id="relationship" class="btn btn-default">Relationship</div>
+    <div id="attribute" class="btn btn-default">Attribute</div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div id="paper"></div>
+    </div>
+  </div>
   
   <%= f.submit @submit_text, class: "btn btn-primary" %>
 <% end %>

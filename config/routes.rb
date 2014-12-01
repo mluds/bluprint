@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/my/students'        => 'users#view_current_user', as: :my_students
   get '/manage/students'    => 'users#view_students',     as: :manage_students
   get '/manage/instructors' => 'users#view_instructors',  as: :manage_instructors
+  delete '/manage/instructors/:i_id/:s_id'  => 'users#remove_student', as: :remove_student
   
   # Authorable problems
   get   '/manage/problems'        => 'authorable_problems#view',   as: :manage_problems

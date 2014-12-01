@@ -1,9 +1,13 @@
+<div class="page-header">
+  <h3>Manage Problems</h3>
+</div>
+
 <%= link_to new_auth_problem_path, class: "btn btn-default" do %>
   <span class="glyphicon glyphicon-file"></span> New problem
 <% end %>
 
 <% if @auth_problems.empty? %>
-  <p>There are no authorable problems to display.</p>
+  <br/><div class="alert alert-info">There are no authorable problems to display.</div>
 <% else %>
   <table class="table">
     <thead>

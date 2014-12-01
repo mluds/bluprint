@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :authorable_problems
   has_and_belongs_to_many :students,
+    class_name: "User",
     join_table: :instructors_students,
     foreign_key: :instructor_id,
     association_foreign_key: :student_id

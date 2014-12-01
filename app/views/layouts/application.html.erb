@@ -12,17 +12,24 @@
   <%= nav_bar fixed: :top, brand: 'bluprint', responsive: true do %>
 
     <%= menu_group do %>
+    
       <%= menu_item 'My Assignments', my_assignments_path %>
-      <%= menu_item 'My Students', my_students_path %>
-      <%= drop_down 'Author' do %>
-        <%= menu_item 'Assignments', author_assignments_path %>
-        <%= menu_item 'Problems', author_problems_path %>
+      
+      <% if current_user.instructor? || current_user.administrator? %>
+        <%= menu_item 'My Students', my_students_path %>
+        <%= drop_down 'Author' do %>
+          <%= menu_item 'Assignments', author_assignments_path %>
+          <%= menu_item 'Problems', author_problems_path %>
+        <% end %>
       <% end %>
-      <%= drop_down 'Manage' do %>
-        <%= menu_item 'Assignments', '/manage/assignments' %>
-        <%= menu_item 'Problems', '/manage/problems' %>
-        <%= menu_item 'Students', '/manage/students' %>
-        <%= menu_item 'Instructors', '/manage/instructors' %>
+      
+      <% if current_user.administrator? %>
+        <%= drop_down 'Manage' do %>
+          <%= menu_item 'Assignments', '/manage/assignments' %>
+          <%= menu_item 'Problems', '/manage/problems' %>
+          <%= menu_item 'Students', '/manage/students' %>
+          <%= menu_item 'Instructors', '/manage/instructors' %>
+        <% end %>
       <% end %>
     <% end %>
     
