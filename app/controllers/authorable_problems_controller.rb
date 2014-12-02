@@ -1,6 +1,7 @@
 class AuthorableProblemsController < ApplicationController
   def view_current_user
-    @auth_problems = AuthorableProblem.all
+    @auth_problems = AuthorableProblem.where user: current_user
+    render :view
   end
 
   def view
