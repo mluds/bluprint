@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>bluprint</title>
+    <title><%= @page_title or 'bluprint' %></title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -12,9 +12,9 @@
   <%= nav_bar fixed: :top, brand: 'bluprint', responsive: true do %>
 
     <%= menu_group do %>
-    
+
       <%= menu_item 'My Assignments', my_assignments_path %>
-      
+
       <% if current_user.instructor? || current_user.administrator? %>
         <%= menu_item 'My Students', my_students_path %>
         <%= drop_down 'Author' do %>
@@ -22,7 +22,7 @@
           <%= menu_item 'Problems', author_problems_path %>
         <% end %>
       <% end %>
-      
+
       <% if current_user.administrator? %>
         <%= drop_down 'Manage' do %>
           <%= menu_item 'Assignments', '/manage/assignments' %>
@@ -32,12 +32,12 @@
         <% end %>
       <% end %>
     <% end %>
-    
+
     <%= menu_group pull: :right do %>
       <%= menu_item 'My Account', '/my/account' %>
       <%= menu_item 'Logout', destroy_user_session_path, method: :delete %>
     <% end %>
-    
+
   <% end %>
 <% end %>
 
@@ -57,9 +57,9 @@
       </div>
     <% end %>
   </div>
-  
-  <div class="main-container">
-    <%= yield %>
+
+  <div class="content">
+    <%= content_for?(:content) ? yield(:content) : yield %>
   </div>
 </div>
 

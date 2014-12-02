@@ -1,0 +1,35 @@
+<% content_for :content do %>
+
+  <div class="page-header">
+    <h3>My Students</h3>
+  </div>
+
+  <% if @users.empty? %>
+    <br/>
+    <div class="alert alert-info">
+      <%= yield :empty_message %>
+    </div>
+
+  <% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <%= yield :table_head %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.role.capitalize %></td>
+            <%= yield :table_body %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  
+<% end %>
+
+<%= render template: 'layouts/application' %>

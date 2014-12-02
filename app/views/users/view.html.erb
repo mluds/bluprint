@@ -1,33 +1,17 @@
-<div class="page-header">
-  <h3>My Students</h3>
-</div>
+<% content_for :empty_message do %>You haven't been assigned any students.<% end %>
 
-<% if @students.empty? %>
-  <br/><div class="alert alert-info">You haven't been assigned any students.</div>
-<% else %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Role</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @students.each do |student| %>
-      <tr>
-        <td><%= student.id %></td>
-        <td><%= student.name %></td>
-        <td><%= student.role.capitalize %></td>
-        <td>
-          <%= link_to remove_student_path(i_id: current_user.id, s_id: student.id), method: :delete do %>
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<% render :table_head, layout: 'users' do %>
+  <th>#</th>
+  <th>Name</th>
+  <th>Role</th>
+  <th></th>
+  <th></th>
+<% end %>
+
+<% content_for :table_body do %>
+  <td>
+    <%= link_to remove_student_path(i_id: current_user.id, s_id: 1), method: :delete do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <% end %>
+  </td>
 <% end %>
