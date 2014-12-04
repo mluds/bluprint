@@ -15,13 +15,17 @@
     </div>
 
     <% if devise_mapping.rememberable? -%>
-      <div class="form-group">
+      <div class="form-group remember">
         <%= f.check_box :remember_me %>
         <%= f.label :remember_me %>
       </div>
+
+    <div class="form-group forgot">
+      <%= link_to 'Forgot Password',  new_password_path(resource_name) %>
+    </div>
     <% end -%>
     
-    <%= f.submit "Log in", class: 'btn btn-primary' %>
+    <%= f.submit "Log in", class: 'btn btn-primary login' %>
     
   <% end %>
 </div>
