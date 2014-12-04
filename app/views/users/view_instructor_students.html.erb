@@ -1,0 +1,23 @@
+<% content_for :thead do %>
+  <td>#</td>
+  <td>Name</td>
+  <td></td>
+<% end %>
+
+<% content_for :tbody do %>
+  <% @collection.each do |student| %>
+    <tr>
+      <td>
+        <%= student.id %>
+      </td>
+      <td>
+        <%= student.name %>
+      </td>
+      <td>
+        <%= link_to remove_student_path(i_id: current_user.id, s_id: student.id), method: :delete do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
