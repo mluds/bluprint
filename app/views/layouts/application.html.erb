@@ -47,12 +47,11 @@
         <div class="text-center">
         <% flash.each do |name, message| %>
             <div class="alert alert-<%= name %> alert-dismissible">
-              <%= message %>
               <button type="button" class="close" data-dismiss="alert">
-
                 <span aria-hidden="true">&times;</span>
                 <span class="sr-only">Close</span>
               </button>
+              <%= message %>
             </div>
 
         <% end %>
