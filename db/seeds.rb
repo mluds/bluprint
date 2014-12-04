@@ -1,10 +1,50 @@
-student = User.create(id: 1, email: 'student@bluprint.com', name: "Student Dude", password: 'password', password_confirmation: 'password', confirmed_at: Time.now, role: 0)
-instructor = User.create(id: 2, email: 'instructor@bluprint.com', name: "Instructor Dude", password: 'password', password_confirmation: 'password', confirmed_at: Time.now, role: 1)
-admin = User.create(id: 3, email: 'admin@bluprint.com', name: "Admin Dude", password: 'password', password_confirmation: 'password', confirmed_at: Time.now, role: 2)
+# Create users
+user_ids = 1..100
 
-instructor.students << student
-admin.students << student
+Fabricator(:user) do
+  name { Faker::Name.name }
+  email { |attrs| Faker::Internet.free_email(attrs[:name]) }
+  password { 'password' }
+  password_confirmation { |attrs| attrs[:password] }
+  confirmed_at { Time.now }
+  role { User.roles.values.sample }
+end
 
-AuthorableProblem.create(user_id: 2, problem_text: "Aliquam erat volutpat. Pellentesque in tincidunt nunc. Suspendisse luctus posuere quam sit amet ultricies. Praesent feugiat quam volutpat dui placerat, sed tempor enim consequat. Morbi risus nulla, lobortis id porta.")
-AuthorableProblem.create(user_id: 2, problem_text: "Curabitur scelerisque mauris nec interdum ullamcorper. In dictum orci vitae tortor tincidunt blandit. Sed pharetra nisl mauris, vel consequat enim semper in. Morbi vestibulum augue vel lacinia cursus. In hac.")
-AuthorableProblem.create(user_id: 3, problem_text: "Quisque accumsan eros ac turpis pharetra, in accumsan magna vestibulum. Aliquam accumsan, lorem quis aliquet posuere, tellus dolor euismod augue, sit amet bibendum sem purus eu libero. Sed lacinia eu.")
+user_ids.each do |id|
+  Fabricate(:user, id: id)
+end
+
+User.roles.each do |k, v|
+  Fabricate(
+    :user,
+    id: user_ids.end + 1 + v,
+    email: k.to_s + '@bluprint.com',
+    role: v
+  )
+end
+
+user_ids = user_ids.begin .. (user_ids.end + User.roles.length)
+
+
+# Create authorable problems
+auth_prob_ids = 1..100
+
+Fabricator(:authorable_problem) do
+  user_id { rand(user_ids) }
+  problem_text { Faker::Lorem.paragraph }
+end
+
+auth_prob_ids.each do |id|
+  Fabricate(:authorable_problem, id: id)
+end
+
+
+# Add student-instructor relations
+User.where(role: User.roles[:instructor]).each do |instructor|
+  students = Array.new(User.all)
+  10.times do
+    s = students.sample
+    students.delete(s)
+    instructor.students << s
+  end
+end

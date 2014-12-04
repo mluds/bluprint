@@ -28,8 +28,8 @@
             <%= drop_down 'Manage' do %>
               <%= menu_item 'Assignments', '/manage/assignments' %>
               <%= menu_item 'Problems', '/manage/problems' %>
-              <%= menu_item 'Students', '/manage/students' %>
-              <%= menu_item 'Instructors', '/manage/instructors' %>
+              <%= menu_item 'Students', manage_students_path %>
+              <%= menu_item 'Instructors', manage_instructors_path %>
             <% end %>
           <% end %>
         <% end %>
@@ -67,7 +67,7 @@
             </h3>
           </div>
         <% end %>
-        
+
         <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
     </div>
