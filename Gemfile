@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate'
+
 # User authentication
 gem 'devise'
 
