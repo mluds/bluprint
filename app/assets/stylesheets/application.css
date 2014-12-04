@@ -14,7 +14,17 @@
  *= require_self
  *= require joint.nojquery
  */
- 
-.form-container { width: 360px; margin: auto }
-.main-container { width: 800px; margin: auto }
-.notifications-container { width: 540px; margin: auto }
+
+body {
+  padding-top: 70px;
+}
+
+.content-container {
+  width: 800px;
+  margin: auto;
+}
+
+.form-container {
+  width: 360px;
+  margin: auto;
+}
