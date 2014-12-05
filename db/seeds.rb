@@ -1,6 +1,3 @@
-# Create users
-user_ids = 1..100
-
 Fabricator(:user) do
   name { Faker::Name.name }
   email { |attrs| Faker::Internet.free_email(attrs[:name]) }
@@ -10,41 +7,54 @@ Fabricator(:user) do
   role { User.roles.values.sample }
 end
 
-user_ids.each do |id|
-  Fabricate(:user, id: id)
+Fabricator(:authorable_assignment) do
+  title { Faker::Lorem.sentence }
 end
-
-User.roles.each do |k, v|
-  Fabricate(
-    :user,
-    id: user_ids.end + 1 + v,
-    email: k.to_s + '@bluprint.com',
-    role: v
-  )
-end
-
-user_ids = user_ids.begin .. (user_ids.end + User.roles.length)
-
-
-# Create authorable problems
-auth_prob_ids = 1..100
 
 Fabricator(:authorable_problem) do
-  user_id { rand(user_ids) }
   problem_text { Faker::Lorem.paragraph }
 end
 
-auth_prob_ids.each do |id|
-  Fabricate(:authorable_problem, id: id)
+Fabricator(:assignment) do
 end
 
+Fabricator(:problem) do
+end
 
-# Add student-instructor relations
-User.where(role: User.roles[:instructor]).each do |instructor|
+100.times { Fabricate(:user) }
+
+User.roles.each do |key, val|
+  Fabricate(
+    :user,
+    email: key.to_s + '@bluprint.com',
+    role: val
+  )
+end
+
+instructors = User.where(
+  role: [User.roles[:instructor], User.roles[:administrator]]
+)
+
+instructors.each do |instructor|
   students = Array.new(User.all)
+
   10.times do
     s = students.sample
     students.delete(s)
     instructor.students << s
+  end
+
+  5.times do
+    Fabricate(:authorable_assignment, user: instructor)
+  end
+
+  10.times do
+    Fabricate(:authorable_problem, user: instructor)
+  end
+end
+
+AuthorableAssignment.all.each do |auth_assign|
+  5.times do
+    auth_assign.auth_probs << AuthorableProblem.all.sample
   end
 end
