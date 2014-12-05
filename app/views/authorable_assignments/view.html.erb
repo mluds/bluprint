@@ -1,2 +1,15 @@
-<h1>AuthorableAssignments#view</h1>
-<p>Find me in app/views/authorable_assignments/view.html.erb</p>
+<% content_for :thead do %>
+  <th>#</th>
+  <th>Title</th>
+  <th>Author</th>
+<% end %>
+
+<% content_for :tbody do %>
+  <% @collection.each do |auth_assign| %>
+    <tr>
+      <td><%= auth_assign.id %></td>
+      <td><%= auth_assign.title %></td>
+      <td><%= auth_assign.user.name %></td>
+    </tr>
+  <% end %>
+<% end %>

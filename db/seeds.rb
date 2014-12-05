@@ -21,6 +21,7 @@ end
 Fabricator(:problem) do
 end
 
+puts "Creating users.."
 100.times { Fabricate(:user) }
 
 User.roles.each do |key, val|
@@ -35,6 +36,7 @@ instructors = User.where(
   role: [User.roles[:instructor], User.roles[:administrator]]
 )
 
+puts "Assigning students to instructors.."
 instructors.each do |instructor|
   students = Array.new(User.all)
 
@@ -43,16 +45,23 @@ instructors.each do |instructor|
     students.delete(s)
     instructor.students << s
   end
+end
 
+puts "Creating authorable assignments.."
+instructors.each do |instructor|
   5.times do
     Fabricate(:authorable_assignment, user: instructor)
   end
+end
 
+puts "Creating authorable problems.."
+instructors.each do |instructor|
   10.times do
     Fabricate(:authorable_problem, user: instructor)
   end
 end
 
+puts "Assigning authorable problems to authorable assignments.."
 AuthorableAssignment.all.each do |auth_assign|
   5.times do
     auth_assign.auth_probs << AuthorableProblem.all.sample
