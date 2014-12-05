@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
-  
+
   enum role: [:student, :instructor, :administrator]
-  
+
   has_many :assignments
+  has_many :authorable_assignments
   has_many :authorable_problems
   has_and_belongs_to_many :students,
     class_name: "User",

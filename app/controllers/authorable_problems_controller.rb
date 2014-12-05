@@ -1,10 +1,15 @@
 class AuthorableProblemsController < ApplicationController
+  layout 'table'
+
   def view_current_user
-    @auth_problems = AuthorableProblem.all
+    @title = 'Author Problems'
+    @collection = current_user.authorable_problems
+    render :view
   end
 
   def view
-    @auth_problems = AuthorableProblem.all
+    @title = 'Manage Problems'
+    @collection = AuthorableProblem.all
   end
 
   def new

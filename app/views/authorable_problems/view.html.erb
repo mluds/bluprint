@@ -1,42 +1,27 @@
-<div class="page-header">
-  <h3>Manage Problems</h3>
-</div>
-
-<%= link_to new_auth_problem_path, class: "btn btn-default" do %>
-  <span class="glyphicon glyphicon-file"></span> New problem
+<% content_for :thead do %>
+  <th>#</th>
+  <th>Problem</th>
+  <th>Author</th>
+  <th></th>
+  <th></th>
 <% end %>
 
-<% if @auth_problems.empty? %>
-  <br/><div class="alert alert-info">There are no authorable problems to display.</div>
-<% else %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Problem</th>
-        <th>Author</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @auth_problems.each do |auth_problem| %>
-      <tr>
-        <td><%= auth_problem.id %></td>
-        <td><%= auth_problem.problem_text %></td>
-        <td><%= auth_problem.user.name %></td>
-        <td>
-          <%= link_to edit_problem_path(id: auth_problem.id) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to delete_auth_problem_path(id: auth_problem.id), method: :delete do %>
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<% content_for :tbody do %>
+  <% @collection.each do |auth_prob| %>
+    <tr>
+      <td><%= auth_prob.id %></td>
+      <td><%= auth_prob.problem_text %></td>
+      <td><%= auth_prob.user.name %></td>
+      <td>
+        <%= link_to edit_problem_path(id: auth_prob.id) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to delete_auth_problem_path(id: auth_prob.id), method: :delete do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 <% end %>

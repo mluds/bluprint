@@ -1,2 +1,21 @@
-<h1>Assignments#view_current_user</h1>
-<p>Find me in app/views/assignments/view_current_user.html.erb</p>
+<% content_for :thead do %>
+  <td>#</td>
+  <td>Title</td>
+  <td>Instructor</td>
+<% end %>
+
+<% content_for :tbody do %>
+  <% @collection.each do |assignment| %>
+    <tr>
+      <td>
+        <%= assignment.id %>
+      </td>
+      <td>
+        <%= assignment.authorable_assignment.title %>
+      </td>
+      <td>
+        <%= assignment.authorable_assignment.user.name %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
