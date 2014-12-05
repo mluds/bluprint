@@ -5,7 +5,7 @@ class AuthorableAssignmentsController < ApplicationController
     @title = 'Author Assignments'
     @empty = "You haven't authored any assignments."
     @collection = current_user.authorable_assignments
-  
+    render :view
   end
 
   def view
