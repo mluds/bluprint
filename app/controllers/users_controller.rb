@@ -14,6 +14,16 @@ class UsersController < ApplicationController
     @collection = instructor.students
   end
 
+  def view_students
+    @title = 'Manage Students'
+    @collection = User.all
+  end
+
+  def view_instructors
+    @title = 'Manage Instructors'
+    @collection = User.where(role:User.roles[:instructor])
+  end
+
   def add_student
     instructor = User.find(params[:i_id])
     student = User.find(params[:s_id])
