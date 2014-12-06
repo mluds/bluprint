@@ -1,3 +1,5 @@
+
+
 <% content_for :thead do %>
   <th>#</th>
   <th>Name</th>
@@ -5,6 +7,38 @@
 <% end %>
 
 <% content_for :buttons do %>
+
+  <%= link_to('Add', manage_students_add_path,
+    method: 'get',
+    id: 'ajaxLink',
+    class: 'btn btn-default',
+    remote: true,
+    data: {
+      toggle: 'modal',
+      target: '#selectStudents'
+  }) %>
+
+  <div class="modal fade"
+    id="selectStudents"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Students</h4>
+        </div>
+
+        <div class="modal-body"><div id="ajaxTarget"></div></div>
+
+      </div>
+    </div>
+
+  </div>
 <% end %>
 
 <% content_for :tbody do %>
@@ -23,4 +57,6 @@
       </td>
     </tr>
   <% end %>
+
+  <%= javascript_include_tag 'ajax' %>
 <% end %>

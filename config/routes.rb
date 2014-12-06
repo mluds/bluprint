@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #Users
   get '/my/students', to: 'users#view_instructor_students', as: :my_students
   get '/students', to: 'users#view_students', as: :manage_students
+  get '/students/add', to: 'users#view_students_add', as: :manage_students_add
   get '/instructors', to: 'users#view_instructors', as: :manage_instructors
 
   post '/instructors/:i_id/:s_id', to: 'users#add_student', as: :add_student

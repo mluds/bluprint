@@ -1,0 +1,30 @@
+<% if @collection.empty? %>
+  <br/>
+  <div class="alert alert-info">
+    <%= @empty or 'There are no records to display.' %>
+  </div>
+
+<% else %>
+
+  <%= yield :buttons %>
+
+  <table class="table">
+
+    <thead>
+      <tr>
+        <%= yield :thead %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= yield :tbody %>
+    </tbody>
+
+  </table>
+
+  <div class="text-center">
+    <%= will_paginate(@collection,
+    renderer: BootstrapPagination::Rails,
+    remote:true) %>
+  </div>
+<% end %>

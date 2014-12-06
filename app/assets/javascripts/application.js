@@ -18,3 +18,4 @@
 //= require joint.shapes.erd
 //= require_tree .
 //= stub diagram
+//= stub ajax

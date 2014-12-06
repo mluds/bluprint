@@ -1,8 +1,19 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+
   protect_from_forgery with: :exception
-  
   before_action :authenticate_user!
+
+  def render *args
+    paginate_collection
+    super
+  end
+
+  private
+
+  def paginate_collection
+    if send(:_layout) == 'table' and @collection
+      @collection = @collection.paginate(page: params[:page])
+    end
+  end
 end

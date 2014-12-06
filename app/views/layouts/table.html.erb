@@ -21,8 +21,14 @@
       <tbody>
         <%= yield :tbody %>
       </tbody>
-      
+
     </table>
+
+    <div class="text-center">
+    <%= will_paginate(@collection,
+      renderer: BootstrapPagination::Rails,
+      remote:true) %>
+    </div>
   <% end %>
 
 <% end %>

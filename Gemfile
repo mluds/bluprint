@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # User authentication
 gem 'devise'

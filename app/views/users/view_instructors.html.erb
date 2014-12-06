@@ -14,7 +14,10 @@
         <%= student.name %>
       </td>
       <td>
-        <%= link_to remove_student_path(i_id: current_user.id, s_id: student.id), method: :delete do %>
+        <%= button_to(
+          remove_student_path(i_id: current_user.id, s_id: student.id),
+          method: :delete) do %>
+
           <span class="glyphicon glyphicon-remove"></span>
         <% end %>
       </td>
