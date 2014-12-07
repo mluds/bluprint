@@ -6,14 +6,16 @@
 
 <% content_for :buttons do %>
 
-  <%= link_to('Add', manage_students_add_path,
-    method: 'get',
-    class: 'btn btn-default ajaxLink',
-    remote: true,
-    data: {
-      toggle: 'modal',
-      target: '#selectStudents'
-  }) %>
+  <span class="buttons">
+    <%= link_to('Add', manage_students_add_path,
+      method: 'get',
+      class: 'btn btn-default',
+      remote: true,
+      data: {
+        toggle: 'modal',
+        target: '#selectStudents'
+    }) %>
+  </span>
 
   <div class="modal fade"
     id="selectStudents"
