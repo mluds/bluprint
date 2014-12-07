@@ -16,9 +16,19 @@ Fabricator(:authorable_problem) do
 end
 
 Fabricator(:assignment) do
+  authorable_assignment { AuthorableAssignment.all.sample }
 end
 
 Fabricator(:problem) do
+  completed { [true, false].sample }
+  attempts do |attrs|
+    if attrs[:completed]
+      r = 1..6
+    else
+      r = 0..4
+    end
+    r.to_a.sample
+  end
 end
 
 puts "Creating users.."
@@ -65,5 +75,19 @@ puts "Assigning authorable problems to authorable assignments.."
 AuthorableAssignment.all.each do |auth_assign|
   5.times do
     auth_assign.auth_probs << AuthorableProblem.all.sample
+  end
+end
+
+puts "Creating assignments.."
+User.all.each do |user|
+  5.times do
+    assign = Fabricate(:assignment, user: user)
+    assign.authorable_assignment.auth_probs.each do |auth_prob|
+      assign.problems << Fabricate(
+        :problem,
+        assignment: assign,
+        authorable_problem: auth_prob
+      )
+    end
   end
 end

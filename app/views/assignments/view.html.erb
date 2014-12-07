@@ -1,0 +1,29 @@
+<% content_for :thead do %>
+  <th>#</th>
+  <th>Problem</th>
+  <th>Completed?</th>
+  <th>Attempts</th>
+<% end %>
+
+<% content_for :tbody do %>
+  <% @collection.each do |prob| %>
+    <tr>
+      <td>
+        <%= prob.id %>
+      </td>
+      <td>
+        <%= link_to do_problem_path(prob.id) do %>
+          <%= prob.authorable_problem.problem_text %>
+        <% end %>
+      </td>
+      <td class="text-center">
+        <% if prob.completed %>
+          <span class="glyphicon glyphicon-ok"></span>
+        <% end %>
+      </td>
+      <td class="text-center">
+        <%= prob.attempts %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
