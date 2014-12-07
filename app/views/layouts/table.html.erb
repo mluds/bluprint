@@ -25,9 +25,7 @@
     </table>
 
     <div class="text-center">
-    <%= will_paginate(@collection,
-      renderer: BootstrapPagination::Rails,
-      remote:true) %>
+      <%= paginate @collection %>
     </div>
   <% end %>
 

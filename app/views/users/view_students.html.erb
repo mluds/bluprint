@@ -14,10 +14,30 @@
         <%= student.name %>
       </td>
       <td>
-        <%= link_to add_student_path(i_id: current_user.id, s_id: student.id), method: :post do %>
+        <% assigned = current_user.students.exists?(student) %>
+
+        <%= content_tag :span, "", class: "glyphicon glyphicon-ok #{assigned ? '' : 'hidden'}" %>
+
+        <%= link_to(
+          add_student_path(i_id: current_user.id, s_id: student.id),
+          method: :post,
+          remote: true,
+          class: assigned ? 'hidden' : ''
+        ) do %>
           <span class="glyphicon glyphicon-plus"></span>
+        <% end %>
+
+        <%= link_to(
+          add_student_path(i_id: current_user.id, s_id: student.id),
+          method: :post,
+          remote: true,
+          class: 'hidden'
+        ) do %>
+          <span class="glyphicon glyphicon-remove"></span>
         <% end %>
       </td>
     </tr>
   <% end %>
+
+  <%= javascript_include_tag 'toggle' %>
 <% end %>

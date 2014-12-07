@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def render *args
-    paginate_collection
+    paginate
     super
   end
 
   private
 
-  def paginate_collection
+  def paginate
     if send(:_layout) == 'table' and @collection
-      @collection = @collection.paginate(page: params[:page])
+      @collection = @collection.page(params[:page])
     end
   end
 end

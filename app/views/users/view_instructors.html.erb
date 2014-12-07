@@ -14,7 +14,7 @@
         <%= student.name %>
       </td>
       <td>
-        <%= button_to(
+        <%= link_to(
           remove_student_path(i_id: current_user.id, s_id: student.id),
           method: :delete) do %>
 
