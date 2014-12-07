@@ -32,10 +32,12 @@ body {
 .remember {
 	display: inline-block;
 }
+
 .forgot {
 	display: inline-block;
 	float: right;
 }
+
 .login {
 	display: block;
 }

@@ -7,4 +7,10 @@ class AssignmentsController < ApplicationController
     @empty = "You haven't been assigned anything."
     @collection = current_user.assignments
   end
+
+  def view
+    assign = Assignment.find(params[:id])
+    @title = assign.authorable_assignment.title
+    @collection = assign.problems
+  end
 end

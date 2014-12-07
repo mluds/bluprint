@@ -1,20 +1,26 @@
 <% content_for :thead do %>
-  <td>#</td>
-  <td>Title</td>
-  <td>Instructor</td>
+  <th>#</th>
+  <th>Title</th>
+  <th>Score</th>
+  <th>Instructor</th>
 <% end %>
 
 <% content_for :tbody do %>
-  <% @collection.each do |assignment| %>
+  <% @collection.each do |assign| %>
     <tr>
       <td>
-        <%= assignment.id %>
+        <%= assign.id %>
       </td>
       <td>
-        <%= assignment.authorable_assignment.title %>
+        <%= link_to view_assignment_path(assign.id) do %>
+          <%= assign.authorable_assignment.title %>
+        <% end %>
       </td>
       <td>
-        <%= assignment.authorable_assignment.user.name %>
+        <%= score(assign) %>
+      </td>
+      <td>
+        <%= assign.authorable_assignment.user.name %>
       </td>
     </tr>
   <% end %>
