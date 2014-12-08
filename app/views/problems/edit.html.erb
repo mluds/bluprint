@@ -1,3 +1,12 @@
-<h1>Problems#edit</h1>
-<p>Find me in app/views/problems/edit.html.erb</p>
-<%= @problem.attempts %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= @problem.authorable_problem.problem_text %>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div id="paper"></div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'diagram' %>
