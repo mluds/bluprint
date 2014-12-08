@@ -38,8 +38,11 @@ Rails.application.routes.draw do
   # Authorable assignments
   get 'author/assignments', to: 'authorable_assignments#view_current_user', as: :author_assignments
   get 'manage/assignments', to: 'authorable_assignments#view', as: :manage_assignments
+  get 'author/assignments/:id', to: 'authorable_assignments#edit', as: :edit_auth_assign
+  delete 'author/assignments/:id', to: 'authorable_assignments#delete', as: :delete_auth_assign
 
   # Assignments
   get 'my/assignments', to: 'assignments#view_current_user', as: :my_assignments
   get 'assignments/:id', to: 'assignments#view', as: :view_assignment
+  post 'assignments/:id', to: 'assignments#create', as: :create_assignments
 end

@@ -1,7 +1,9 @@
 <% content_for :thead do %>
   <th>#</th>
   <th>Title</th>
-  <th>Author</th>
+  <th></th>
+  <th></th>
+  <th></th>
 <% end %>
 
 <% content_for :tbody do %>
@@ -9,7 +11,46 @@
     <tr>
       <td><%= auth_assign.id %></td>
       <td><%= auth_assign.title %></td>
-      <td><%= auth_assign.user.name %></td>
+      <td>
+        <%= link_to(
+          edit_auth_assign_path(auth_assign.id),
+          data: {
+            toggle: 'tooltip',
+            title: 'Edit',
+            placement: 'top'
+          }
+        ) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to(
+          delete_auth_assign_path(auth_assign.id),
+          method: :delete,
+          data: {
+            toggle: 'tooltip',
+            title: 'Delete',
+            placement: 'top'
+          }
+        ) do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </td>
+      <% if current_user == auth_assign.user %>
+        <td>
+          <%= link_to(
+            create_assignments_path(auth_assign.id),
+            method: :post,
+            data: {
+              toggle: 'tooltip',
+              title: 'Publish',
+              placement: 'top'
+            }
+          ) do %>
+            <span class="glyphicon glyphicon-share-alt"></span>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 <% end %>

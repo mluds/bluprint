@@ -13,4 +13,8 @@ class AssignmentsController < ApplicationController
     @title = assign.authorable_assignment.title
     @collection = assign.problems
   end
+
+  def create
+    redirect_to :back
+  end
 end
