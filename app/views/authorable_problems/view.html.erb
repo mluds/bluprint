@@ -13,12 +13,27 @@
       <td><%= auth_prob.problem_text %></td>
       <td><%= auth_prob.user.name %></td>
       <td>
-        <%= link_to edit_problem_path(id: auth_prob.id) do %>
+        <%= link_to(
+          edit_problem_path(auth_prob.id),
+          data: {
+            toggle: 'tooltip',
+            title: 'Edit',
+            placement: 'top'
+          }
+        ) do %>
           <span class="glyphicon glyphicon-pencil"></span>
         <% end %>
       </td>
       <td>
-        <%= link_to delete_auth_problem_path(id: auth_prob.id), method: :delete do %>
+        <%= link_to(
+          delete_auth_problem_path(auth_prob.id),
+          method: :delete,
+          data: {
+            toggle: 'tooltip',
+            title: 'Delete',
+            placement: 'top'
+          }
+        ) do %>
           <span class="glyphicon glyphicon-trash"></span>
         <% end %>
       </td>

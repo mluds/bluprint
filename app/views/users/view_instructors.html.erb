@@ -5,16 +5,24 @@
 <% end %>
 
 <% content_for :tbody do %>
-  <% @collection.each do |student| %>
+  <% @collection.each do |instructor| %>
     <tr>
       <td>
-        <%= student.id %>
+        <%= instructor.id %>
       </td>
       <td>
-        <%= student.name %>
+        <%= instructor.name %>
       </td>
       <td>
-        <%= link_to remove_student_path(i_id: current_user.id, s_id: student.id), method: :delete do %>
+        <%= link_to(
+          remove_student_path(i_id: current_user.id, s_id: instructor.id),
+          method: :delete,
+          data: {
+            toggle: 'tooltip',
+            title: 'Remove',
+            placement: 'top'
+          }
+        ) do %>
           <span class="glyphicon glyphicon-remove"></span>
         <% end %>
       </td>

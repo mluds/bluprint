@@ -13,4 +13,15 @@ class AuthorableAssignmentsController < ApplicationController
     @empty = 'No assignments have been authored.'
     @collection = AuthorableAssignment.all
   end
+
+  def edit
+    auth_assign = AuthorableAssignment.find(params[:id])
+    @title = auth_assign.title
+    @collection = auth_assign.auth_probs
+    render 'authorable_problems/view'
+  end
+
+  def delete
+    redirect_to :back
+  end
 end
