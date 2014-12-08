@@ -36,6 +36,7 @@ class AuthorableProblemsController < ApplicationController
     @auth_problem = AuthorableProblem.find(params[:id])
     @submit_url = update_problem_path
     @submit_text = "Update"
+    render layout: "application"
   end
 
   def update
