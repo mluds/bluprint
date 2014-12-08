@@ -19,6 +19,10 @@ body {
   padding-top: 70px;
 }
 
+h3 {
+  display: inline-block;
+}
+
 .content-container {
   width: 800px;
   margin: auto;
@@ -27,6 +31,12 @@ body {
 .form-container {
   width: 360px;
   margin: auto;
+}
+
+.buttons {
+  display: inline-block;
+  float: right;
+  margin-top: 20px;
 }
 
 .remember {

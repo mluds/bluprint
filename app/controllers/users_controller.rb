@@ -19,6 +19,11 @@ class UsersController < ApplicationController
     @collection = User.all
   end
 
+  def view_students_add
+    @collection = User.all
+    render :view_students, layout: 'table_ajax'
+  end
+
   def view_instructors
     @title = 'Manage Instructors'
     @collection = User.where(role:User.roles[:instructor])

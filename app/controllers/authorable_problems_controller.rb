@@ -15,8 +15,8 @@ class AuthorableProblemsController < ApplicationController
   def new
     @auth_problem = AuthorableProblem.new
     @submit_url = create_auth_problem_path
-    @submit_text = "Create"
-    render :edit
+    @submit_text = 'Create'
+    render :edit, layout: 'application'
   end
 
   def create
@@ -24,7 +24,7 @@ class AuthorableProblemsController < ApplicationController
     auth_problem.user = current_user
     auth_problem.problem_text = params[:authorable_problem][:problem_text]
     if auth_problem.save
-      flash[:notice] = "Problem created"
+      flash[:notice] = 'Problem created'
       redirect_to edit_problem_path(id: auth_problem.id)
     else
       flash[:alert] = auth_problem.errors.full_messages.first
@@ -43,7 +43,7 @@ class AuthorableProblemsController < ApplicationController
     auth_problem = AuthorableProblem.find(params[:id])
     auth_problem.problem_text = params[:authorable_problem][:problem_text]
     if auth_problem.save
-      flash[:notice] = "Problem saved"
+      flash[:notice] = 'Problem saved'
     else
       flash[:alert] = auth_problem.errors.full_messages.first
     end

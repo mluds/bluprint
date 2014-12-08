@@ -1,0 +1,28 @@
+<% if @collection.empty? %>
+  <br/>
+  <div class="alert alert-info">
+    <%= @empty or 'There are no records to display.' %>
+  </div>
+
+<% else %>
+
+  <table class="table">
+
+    <thead>
+      <tr>
+        <%= yield :thead %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= yield :tbody %>
+    </tbody>
+
+  </table>
+
+  <div class="text-center">
+    <%= paginate @collection, remote: true %>
+  </div>
+
+  <%= javascript_include_tag 'ajax' %>
+<% end %>

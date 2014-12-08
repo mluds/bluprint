@@ -14,9 +14,29 @@
         <%= student.name %>
       </td>
       <td>
+        <% assigned = current_user.students.exists?(student) %>
+
+        <%= content_tag :span, "", class: "glyphicon glyphicon-ok #{assigned ? '' : 'hidden'}" %>
+
+        <%= link_to(
+          add_student_path(i_id: current_user.id, s_id: student.id),
+          method: :post,
+          remote: true,
+          class: assigned ? 'hidden' : '',
+          data: {
+            toggle: 'tooltip',
+            title: 'Add',
+            placement: 'top'
+          }
+        ) do %>
+          <span class="glyphicon glyphicon-plus"></span>
+        <% end %>
+
         <%= link_to(
           remove_student_path(i_id: current_user.id, s_id: student.id),
-          method: :delete,
+          method: :post,
+          remote: true,
+          class: 'hidden',
           data: {
             toggle: 'tooltip',
             title: 'Remove',
@@ -28,4 +48,6 @@
       </td>
     </tr>
   <% end %>
+
+  <%= javascript_include_tag 'toggle' %>
 <% end %>

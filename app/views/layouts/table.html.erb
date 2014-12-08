@@ -8,8 +8,6 @@
 
   <% else %>
 
-    <%= yield :buttons %>
-
     <table class="table">
 
       <thead>
@@ -21,8 +19,12 @@
       <tbody>
         <%= yield :tbody %>
       </tbody>
-      
+
     </table>
+
+    <div class="text-center">
+      <%= paginate @collection %>
+    </div>
   <% end %>
 
 <% end %>
